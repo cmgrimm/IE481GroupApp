@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+<form name="recovery">
+Type your email address<input type="text" name="mail"/>
+<input type="button" onClick="check(this.form)" value="send"/>
+<A HREF="login.html">Back to login</A>
+
+</form>
+
+<script language="javascript">
+function check(form)
+{
+
+ if(form.mail.value == "mail@hotmail.com")
+  {
+    alert('Email send')
+  }
+ else
+ {
+   alert("Email address is not in the system")
+  }
+}
+</script>
+
+
+</body>
+</html>

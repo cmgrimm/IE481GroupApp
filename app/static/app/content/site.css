@@ -40,3 +40,8 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+    .sidenav {
+      padding-top: 20px;
+      height: 100%;
+    }

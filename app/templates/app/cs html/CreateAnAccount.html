@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CreateAnAccount</title>
+</head>
+
+<body>
+
+<h1 style="font-family:Comic Sans Ms;text-align="center";font-size:20pt;
+color:#00FF00;>
+Create an account 
+</h1>
+<form name="CAA">
+
+<form name="CreateAnAccount">
+First name<input type="text" name="fname"/> <br>
+Last name<input type="text" name="lname"/> <br>
+Choose username<input type="text" name="Uname"/> <br>
+Choose password<input type="text" name="password"/> <br>
+Repeat password<input type="text" name="rpassword"/> <br>
+Birth (mm/dd/yy)<input type="text" name="birth"/><br>
+Major<input type="text" name="major"/> <br>
+Email<input type="text" name="email"/> <br>
+
+<input type="button" onClick="check(this.form)" value="next"/> 
+
+
+</form>
+
+
+<script language="javascript">
+function check(form)
+{
+ if(form.fname.value && form.lname.value && form.Uname.value && form.password.value && form.rpassword.value && form.birth.value && form.major.value && form.email.value != undefined )
+  {
+    window.open('profile.html')
+  }
+ else
+ {
+   alert("Please fill out every question")
+  }
+}
+
+</script>
+
+
+
+
+
+</body>
+</html>

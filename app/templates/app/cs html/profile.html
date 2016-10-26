@@ -28,7 +28,7 @@ Write your text profile <br>
 <div class="row">
                  <div class="col-sm-4">Department</div>
                  <div class="col-sm-4">  
-                    <select name="Grade">
+                    <select name="Department">
                     <option value="D1">Department1</option>
                     <option value="D2">Department2</option>
                     <option value="D2">Department3</option>
@@ -49,17 +49,58 @@ Write your text profile <br>
                     
                     </select> 
                  </div> <br>
-            
-<div class="row">
+                 
+ <form>                
                  <div class="col-sm-4">Select classes</div>
+<select id=classes name=classes>           
                  <div class="col-sm-4">  
-                    <select name="Grade">
+                    <select name="class">
                        <option value="C1">Class1</option>
                        <option value="C2">Class2</option>
                        <option value="C2">Class3</option>
 
                     </select> 
                  </div> <br>
+</form>
+
+
+<div id='item'></div>
+
+<input name='add' type='button' id='add' value='Add Classes'/>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+var item = document.getElementById('item');
+
+var stopper=0;
+
+document.getElementById('add').onclick = function () {
+
+stopper=stopper+1;
+
+  var input = document.createElement('input'),
+      div = document.createElement('div');
+  input.type = "classes";
+  input.setAttribute("name", "classes[]");
+  input.setAttribute("class", "classes");
+
+  div.appendChild(input);
+  //...
+
+  item.appendChild(div);
+
+};
+</script>
+
+
+
+
+<br>
+
+
 
 <button onclick="myFunction()">Done</button>
 

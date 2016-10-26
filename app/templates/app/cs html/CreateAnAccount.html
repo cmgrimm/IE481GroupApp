@@ -20,7 +20,6 @@ Choose username<input type="text" name="Uname"/> <br>
 Choose password<input type="text" name="password"/> <br>
 Repeat password<input type="text" name="rpassword"/> <br>
 Birth (mm/dd/yy)<input type="text" name="birth"/><br>
-Major<input type="text" name="major"/> <br>
 Email<input type="text" name="email"/> <br>
 
 <input type="button" onClick="check(this.form)" value="next"/> 
@@ -32,7 +31,7 @@ Email<input type="text" name="email"/> <br>
 <script language="javascript">
 function check(form)
 {
- if(form.fname.value && form.lname.value && form.Uname.value && form.password.value && form.rpassword.value && form.birth.value && form.major.value && form.email.value != undefined )
+ if(form.fname.value && form.lname.value && form.Uname.value && form.password.value && form.rpassword.value && form.birth.value && form.email.value != undefined )
   {
     window.open('profile.html')
   }

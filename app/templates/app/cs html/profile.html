@@ -24,69 +24,82 @@ Write your text profile <br>
             name="TextProfile" 
             rows="5"
             cols="80">Your profile</textarea><br>
-            
+                           
+<br>               
+               
 <div class="row">
-                 <div class="col-sm-4">Department</div>
-                 <div class="col-sm-4">  
-                    <select name="Department">
-                    <option value="D1">Department1</option>
-                    <option value="D2">Department2</option>
-                    <option value="D2">Department3</option>
-
-                    </select> 
-                 </div> <br>
-
-
-
-<div class="row">
-                 <div class="col-sm-4">Grade</div>
+                 <div class="col-sm-4"> 
+<select id="slct1" name="slct1" onchange="populate(this.id,'slct2')">
+  <option value="SD">Select Department</option>
+  <option value="IE">Industrial Engineer</option>
+  <option value="ME">Mechanical Engineer</option>
+  <option value="DE">Design engineer</option>
+</select>
+   </div> <br>
+   
+   
+   
+ <div class="row">
                  <div class="col-sm-4">  
                     <select name="Grade">
+                    <option value="G">Chose grade</option>
                        <option value="F">Freshmen</option>
                        <option value="S">Sophomore</option>
                        <option value="J">Junior</option>
                        <option value="S">Senior</option>
                     
                     </select> 
-                 </div> <br>
-                 
- <form>                
-                 <div class="col-sm-4">Select classes</div>
-<select id=classes name=classes>           
+                 </div> <br>  
+   
+   
+   
+<div class="row">
                  <div class="col-sm-4">  
-                    <select name="class">
-                       <option value="C1">Class1</option>
-                       <option value="C2">Class2</option>
-                       <option value="C2">Class3</option>
-
-                    </select> 
-                 </div> <br>
-</form>
+                  <div id='class'>
+<select id="slct2" name="slct2">
+ <option value="SD">Select class</option></select>
+</div> 
+</div> </div><br>
 
 
-<div id='item'></div>
+<input name='class' type='button' id='add' value='Add Classes'/>
 
-<input name='add' type='button' id='add' value='Add Classes'/>
 
-</body>
-</html>
+<script>
+function populate(s1,s2){
+	var s1 = document.getElementById(s1);
+	var s2 = document.getElementById(s2);
+	s2.innerHTML = "";
+	if(s1.value == "IE"){
+		var optionArray = ["Select class| Select class","IE481|IE481","IE4xx2|IExx2","IExx3|IExx3","IExx4|IExx4"];
+	} else if(s1.value == "ME"){
+		var optionArray = ["Select class| Select class","MExxx|MExxx","ME4xx2|MExx2","MExx3|MExx3","MExx4|MExx4"];
+	} else if(s1.value == "DE"){
+		var optionArray = ["Select class| Select class","DExxx|DExxx","DE4xx2|DExx2","DExx3|DExx3","DExx4|DExx4"];
+	}
+	for(var option in optionArray){
+		var pair = optionArray[option].split("|");
+		var newOption = document.createElement("option");
+		newOption.value = pair[0];
+		newOption.innerHTML = pair[1];
+		s2.options.add(newOption);
+	}
+}
+</script>
+
+
+
 
 <script type="text/javascript">
 
-var item = document.getElementById('item');
-
-var stopper=0;
+var item = document.getElementById('class');
 
 document.getElementById('add').onclick = function () {
 
-stopper=stopper+1;
-
-  var input = document.createElement('input'),
+  var input = document.createElement('select'),
       div = document.createElement('div');
-  input.type = "classes";
-  input.setAttribute("name", "classes[]");
-  input.setAttribute("class", "classes");
-
+ input.innerHTML = document.getElementById("slct2").innerHTML;
+  
   div.appendChild(input);
   //...
 
@@ -109,6 +122,8 @@ function myFunction() {
   alert("Your profile is succesful created");
 }
 </script>
+
+
 
 </body>
 </html>

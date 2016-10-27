@@ -24,6 +24,7 @@ urlpatterns = [
         {
             'template_name': 'app/login.html',
             'authentication_form': app.forms.BootstrapAuthenticationForm,
+            #'new_account': app.forms.BootstrapNewAccountForm,
             'extra_context':
             {
                 'title': 'Log in',

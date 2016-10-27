@@ -22,6 +22,17 @@
                         {{ form.password }}
                     </div>
                 </div>
+                 <script>
+                  $(function() {
+                    $( ".datepicker" ).datepicker({
+                      changeMonth: true,
+                      changeYear: true,
+                      yearRange: "1900:2012",
+                      // You can put more options here.
+
+                    });
+                  });
+                  </script>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="hidden" name="next" value="/" />

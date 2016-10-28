@@ -7,6 +7,16 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
 from app.forms import NewAccount
+from django.http import HttpResponseRedirect
+
+
+def classPage(request):
+    """Renders class page"""
+    assert isinstance(request,HttpRequest)
+    return render(
+        request,
+        'app/classPage.html'
+    )
 
 def profile(request):
     """Renders profile page"""
@@ -20,13 +30,16 @@ def newaccount(request):
     """renders account creation page"""
     assert isinstance(request,HttpRequest)
     f = NewAccount()
-    return render(
-        request,
-        'app/newaccount.html',
-        {
-            'myForm':f
-        }
-    )
+    if request.method == 'POST':
+        return HttpResponseRedirect('profile')
+    else:
+        return render(
+            request,
+            'app/newaccount.html',
+            {
+                'myForm':f
+            }
+        )
 
 def recovery(request):
     """Renders account recovery page"""

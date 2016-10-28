@@ -9,14 +9,15 @@
 
 <body>
 
-<form name="recovery">
-Type your email address<input type="text" name="mail"/>
-<input type="button" onClick="check(this.form)" value="send"/>
-<a href="{% url 'login' %}">Back to login</a>
- 
-
-
-
+<form name="recovery", method='post'>
+     {% csrf_token %}
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email">
+    </div>
+    <p> <input name="Send" TYPE="submit" VALUE="Send"
+    class="btn btn‐default" /></p>
+    <a href="{% url 'login' %}">Back to login</a>
 </form>
 
 <script language="javascript">

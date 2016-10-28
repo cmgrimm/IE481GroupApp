@@ -70,6 +70,7 @@
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\profile.html" />
     <Content Include="app\templates\app\recovery.html" />
+    <Content Include="app\templates\app\classPage.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

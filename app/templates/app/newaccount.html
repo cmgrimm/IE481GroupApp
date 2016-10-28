@@ -1,0 +1,28 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CreateAnAccount</title>
+</head>
+
+<body>
+
+<h1 style="font-family:Comic Sans" Ms;text-align="center";font-size:20pt;
+color:#00FF00;>
+Create an account 
+</h1>
+
+    <FORM method="post">
+    {% csrf_token %}
+        <table>
+            {{ myForm.as_table }}
+        </table>
+        <p> <input name="Send" TYPE="submit" VALUE="Send"
+    class="btn btn‐default" /></p>
+    </FORM>
+
+</body>
+
+{% endblock %}

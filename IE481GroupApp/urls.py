@@ -38,6 +38,9 @@ urlpatterns = [
             'next_page': '/',
         },
         name='logout'),
+    url(r'^recovery$', app.views.recovery, name = 'recovery'),
+    url(r'^profile$', app.views.profile, name = 'profile'),
+    url(r'^newaccount$', app.views.newaccount, name = 'newaccount'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

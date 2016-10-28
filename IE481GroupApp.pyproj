@@ -66,6 +66,10 @@
     <Content Include="app\static\app\scripts\tab.js" />
     <Content Include="app\static\app\scripts\tooltip.js" />
     <Content Include="app\static\app\scripts\transition.js" />
+    <Content Include="app\templates\app\newaccount.html" />
+    <Content Include="app\templates\app\login.html" />
+    <Content Include="app\templates\app\profile.html" />
+    <Content Include="app\templates\app\recovery.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
@@ -94,7 +98,7 @@
     <Content Include="app\templates\app\contact.html" />
     <Content Include="app\templates\app\index.html" />
     <Content Include="app\templates\app\layout.html" />
-    <Content Include="app\templates\app\login.html" />
+    <Content Include="app\templates\app\loginDefault.html" />
     <Content Include="app\templates\app\loginpartial.html" />
   </ItemGroup>
   <ItemGroup>

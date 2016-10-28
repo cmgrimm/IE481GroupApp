@@ -1,0 +1,117 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Profile</title>
+</head>
+
+<body>
+
+<h1 style="font-family:Comic Sans" Ms;text-align="center";font-size:20pt;
+color:#00FF00;>
+Profile
+</h1>
+<form name="Profile">
+
+<form name="Profile">
+City<input type="text" name="City"/><br>
+                 
+Insert photo <div class="_3jk"><input type="file" class="_n _5f0v" title="Vælg en fil at overføre" accept="image/*" multiple="1" size="0" id="js_12"></div>
+
+Write your text profile <br>
+<textarea class="form-control" 
+            id="Description" 
+            name="TextProfile" 
+            rows="5"
+            cols="80">Your profile</textarea><br>
+            
+<div class="row">
+                 <div class="col-sm-4">Department</div>
+                 <div class="col-sm-4">  
+                    <select name="Department">
+                    <option value="D1">Department1</option>
+                    <option value="D2">Department2</option>
+                    <option value="D2">Department3</option>
+
+                    </select> 
+                 </div> <br>
+
+
+
+<div class="row">
+                 <div class="col-sm-4">Grade</div>
+                 <div class="col-sm-4">  
+                    <select name="Grade">
+                       <option value="F">Freshmen</option>
+                       <option value="S">Sophomore</option>
+                       <option value="J">Junior</option>
+                       <option value="S">Senior</option>
+                    
+                    </select> 
+                 </div> <br>
+                 
+ <form>                
+                 <div class="col-sm-4">Select classes</div>
+<select id=classes name=classes>           
+                 <div class="col-sm-4">  
+                    <select name="class">
+                       <option value="C1">Class1</option>
+                       <option value="C2">Class2</option>
+                       <option value="C2">Class3</option>
+
+                    </select> 
+                 </div> <br>
+</form>
+
+
+<div id='item'></div>
+
+<input name='add' type='button' id='add' value='Add Classes'/>
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+var item = document.getElementById('item');
+
+var stopper=0;
+
+document.getElementById('add').onclick = function () {
+
+stopper=stopper+1;
+
+  var input = document.createElement('input'),
+      div = document.createElement('div');
+  input.type = "classes";
+  input.setAttribute("name", "classes[]");
+  input.setAttribute("class", "classes");
+
+  div.appendChild(input);
+  //...
+
+  item.appendChild(div);
+
+};
+</script>
+
+
+
+
+<br>
+
+
+
+<button onclick="myFunction()">Done</button>
+
+<script>
+function myFunction() {
+  alert("Your profile is succesful created");
+}
+</script>
+
+</body>
+
+{% endblock %}

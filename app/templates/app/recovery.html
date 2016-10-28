@@ -1,0 +1,41 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+<form name="recovery">
+Type your email address<input type="text" name="mail"/>
+<input type="button" onClick="check(this.form)" value="send"/>
+<a href="{% url 'login' %}">Back to login</a>
+ 
+
+
+
+</form>
+
+<script language="javascript">
+function check(form)
+{
+
+ if(form.mail.value == "mail@hotmail.com")
+  {
+    alert('Email send')
+  }
+ else
+ {
+   alert("Email address is not in the system")
+  }
+  
+}
+</script>
+
+
+</body>
+
+{% endblock %}

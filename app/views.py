@@ -7,15 +7,20 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
 from app.forms import NewAccount
+from app.forms import profile
 from django.http import HttpResponseRedirect
 
 
 def classPage(request):
     """Renders class page"""
     assert isinstance(request,HttpRequest)
+    fp = profile()
     return render(
         request,
-        'app/classPage.html'
+        'app/classPage.html',
+        {
+            'profileTable':fp
+        }
     )
 
 def profile(request):
@@ -36,7 +41,7 @@ def newaccount(request):
         return render(
             request,
             'app/newaccount.html',
-            {
+            { 
                 'myForm':f
             }
         )

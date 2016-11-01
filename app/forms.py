@@ -58,19 +58,31 @@ class NewAccount(forms.Form):
                                    'class': 'form-control',
                                    'placeholder':'Confirm Password'}))
 
+class Profile(forms.Form):
 
-    city = forms.CharField(label='City',
+    city = forms.CharField(label='City:',
                            max_length=30,
                            widget=forms.TextInput({
                              'class': 'form-control',
                              'placeholder': 'City'}))
 
+    photo = forms.FileField(label='Profile Photo:',
+                           max_length=30,
+                           widget=forms.FileInput({
+                           'class': 'control-label'}))
 
-    profileText = forms.CharField(label="Profile text",
+    profileText = forms.CharField(label="Profile text:",
                                   max_length=1500,
                                   widget=forms.Textarea({
                                  'class': 'form-control',
                                  'placeholder': 'I M Kewl',
                                  'rows':'5'}))
 
-    month = forms.ChoiceField(choices=("IE","ME","DE"))
+    major = (
+    (0, _('IE')),
+    (1, _('ME')),
+    (2, _('DE'))
+)
+
+    department = forms.ChoiceField(label = "Department:", 
+                                   choices=major)

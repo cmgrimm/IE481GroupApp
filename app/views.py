@@ -7,28 +7,28 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
 from app.forms import NewAccount
-from app.forms import profile
+from app.forms import Profile
 from django.http import HttpResponseRedirect
 
 
 def classPage(request):
     """Renders class page"""
     assert isinstance(request,HttpRequest)
-    fp = profile()
     return render(
         request,
         'app/classPage.html',
-        {
-            'profileTable':fp
-        }
     )
 
 def profile(request):
     """Renders profile page"""
     assert isinstance(request,HttpRequest)
+    fp = Profile()
     return render(
         request,
-        'app/profile.html'
+        'app/profile.html',
+        { 
+            'profileTable':fp
+        }
     )
 
 def newaccount(request):
@@ -74,7 +74,7 @@ def contact(request):
         'app/contact.html',
         {
             'title':'Contact',
-            'message':'Your contact page.',
+            'message':'Contact us!',
             'year':datetime.now().year,
         }
     )
@@ -87,7 +87,7 @@ def about(request):
         'app/about.html',
         {
             'title':'About',
-            'message':'Your application description page.',
+            'message':'This app is cool.',
             'year':datetime.now().year,
         }
     )

@@ -4,37 +4,38 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>Password Recovery</title>
 </head>
 
+
 <body>
+    <h1>Password Recovery</h1>
+    <form name="recovery", method='post'>
+         {% csrf_token %}
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email">
+        </div>
+        <p> <input name="Send" TYPE="submit" VALUE="Send"
+        class="btn btn‐default" /></p>
+        <a href="{% url 'login' %}">Back to login</a>
+    </form>
 
-<form name="recovery", method='post'>
-     {% csrf_token %}
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email">
-    </div>
-    <p> <input name="Send" TYPE="submit" VALUE="Send"
-    class="btn btn‐default" /></p>
-    <a href="{% url 'login' %}">Back to login</a>
-</form>
+    <script language="javascript">
+    function check(form)
+    {
 
-<script language="javascript">
-function check(form)
-{
-
- if(form.mail.value == "mail@hotmail.com")
-  {
-    alert('Email send')
-  }
- else
- {
-   alert("Email address is not in the system")
-  }
+     if(form.mail.value == "mail@hotmail.com")
+      {
+        alert('Email send')
+      }
+     else
+     {
+       alert("Email address is not in the system")
+      }
   
-}
-</script>
+    }
+    </script>
 
 
 </body>

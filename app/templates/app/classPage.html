@@ -15,10 +15,35 @@
          <h1>Welcome Guest!</h1>
       {% endif %}
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>Here you will be able to select a member of your classes and send them a message.</p>
       <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+      <h3>Class 1</h3>
+      
+      <!-- Link trigger modal -->
+        <ul>
+            <li><a data-toggle="modal" href="#myModal">John Smith</a></li>
+            <li><a data-toggle="modal" href="#myModal">Jane Doe</a></li>
+            <li><a data-toggle="modal" href="#myModal">Josh Star</a></li>
+        </ul>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Send Message</h4>
+              </div>
+              <div class="form-group">
+                  <label for="comment">Message:</label>
+                  <textarea class="form-control" rows="5" id="comment"></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">

@@ -11,3 +11,16 @@ C:\Users\Chase\Desktop\DesktopFolders\481Project\IE481GroupApp\IE481GroupApp\bin
 C:\Users\Chase\Desktop\DesktopFolders\481Project\IE481GroupApp\IE481GroupApp\bin\wfastcgi.py
 C:\Users\Chase\Desktop\DesktopFolders\481Project\IE481GroupApp\IE481GroupApp\obj\Debug\web.config
 C:\Users\Chase\Desktop\DesktopFolders\481Project\IE481GroupApp\IE481GroupApp\obj\Debug\web.debug.config
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\bin\Microsoft.PythonTools.WebRole.dll
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\obj\Debug\attach_server.py
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\obj\Debug\visualstudio_py_debugger.py
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\obj\Debug\visualstudio_py_repl.py
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\obj\Debug\visualstudio_py_util.py
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\obj\Debug\__init__.py
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\obj\Debug\__main__.py
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\bin\AzureSetup.cfg
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\bin\Microsoft.PythonTools.AzureSetup.exe
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\bin\Microsoft.PythonTools.AzureSetup.exe.config
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\bin\wfastcgi.py
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\obj\Debug\web.config
+C:\Users\Camilla\Desktop\ID\5. semester\e-commerce\project\IE481GroupApp\obj\Debug\web.debug.config

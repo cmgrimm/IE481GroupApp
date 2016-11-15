@@ -78,11 +78,13 @@ class Profile(forms.Form):
                                  'placeholder': 'I M Kewl',
                                  'rows':'5'}))
 
-    major = (
-    (0, _('IE')),
-    (1, _('ME')),
-    (2, _('DE'))
+
+    Level = (
+    (0, _('Freshmen')),
+    (1, _('Sophomore')),
+    (2, _('Junior')),
+    (3, _('Senior'))
 )
 
-    department = forms.ChoiceField(label = "Department:", 
-                                   choices=major)
+    grade = forms.ChoiceField(label = "Grade:", 
+                                   choices=Level)

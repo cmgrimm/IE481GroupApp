@@ -17,6 +17,15 @@ Profile
             {{ profileTable.as_table }}
         </table>
 
+<div class="row">
+        <div class="col-sm-4"> 
+        <select id="slct1" name="slct1" onchange="populate(this.id,'slct2')">
+            <option value="SD">Select Department</option>
+            <option value="IE">Industrial Engineer</option>
+            <option value="ME">Mechanical Engineer</option>
+            <option value="DE">Design engineer</option>
+        </select>  </div>  </div>
+
     <div class="row">
         <div class="col-sm-4">  
             <div id='class'>

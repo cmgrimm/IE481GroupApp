@@ -52,9 +52,13 @@
     <Folder Include="IE481GroupApp\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\static\app\content\bootstrap-select.css" />
+    <Content Include="app\static\app\content\bootstrap-select.min.css" />
     <Content Include="app\static\app\scripts\affix.js" />
     <Content Include="app\static\app\scripts\alert.js" />
     <Content Include="app\static\app\scripts\bootstrap-datepicker.js" />
+    <Content Include="app\static\app\scripts\bootstrap-select.js" />
+    <Content Include="app\static\app\scripts\bootstrap-select.min.js" />
     <Content Include="app\static\app\scripts\button.js" />
     <Content Include="app\static\app\scripts\carousel.js" />
     <Content Include="app\static\app\scripts\collapse.js" />

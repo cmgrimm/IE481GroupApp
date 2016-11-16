@@ -84,7 +84,17 @@ class Profile(forms.Form):
     (1, _('Sophomore')),
     (2, _('Junior')),
     (3, _('Senior'))
-)
+    )
 
     grade = forms.ChoiceField(label = "Grade:", 
                                    choices=Level)
+
+    mjr = (
+    (0, _('Industrial Engineering')),
+    (1, _('Mechanical Engineering')),
+    (2, _('Design Engineering'))
+    )
+
+    major = forms.ChoiceField(label = "Major:", 
+                                   choices=mjr)
+

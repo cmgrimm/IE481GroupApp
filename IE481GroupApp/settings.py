@@ -77,24 +77,12 @@ WSGI_APPLICATION = 'IE481GroupApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-# temp connection string paste
-Server=tcp:groupapp.database.windows.net,1433;Initial Catalog=GroupApp;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
-
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'sql_server.pyodbc',
-            'NAME': 'groupapp.database.windows.net',
-            'USER': 'projectAdmin',
-            'PASSWORD': 'IE481Project',
-            'HOST': '<ServerName>',
-            'PORT': '<ServerPort>',
-            'OPTIONS': {
-                'driver': 'SQL Server Native Client 11.0',
-                'MARS_Connection': 'True',
-            }
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}
 
 
 # Password validation

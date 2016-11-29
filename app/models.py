@@ -15,9 +15,8 @@ class userAccount(models.Model):
     grade = models.CharField(max_length=100)
     major = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
-    #birthday = models.DateField()
+    birthday = models.CharField(max_length=100)
     profileText = models.CharField(max_length=1000)
-    test = models.CharField(max_length=100)
     pass
 
 

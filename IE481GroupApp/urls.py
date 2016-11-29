@@ -13,10 +13,12 @@ import app.views
 # from django.conf.urls import include
 # from django.contrib import admin
 # admin.autodiscover()
+include('django_messages.urls')
 
 urlpatterns = [
     # Examples:
     url(r'^$', app.views.home, name='home'),
+    (r'^messages/', include('django_messages.urls')),
     url(r'^classPage$', app.views.classPage, name='classPage'),
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about', app.views.about, name='about'),

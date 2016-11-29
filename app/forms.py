@@ -6,7 +6,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 
-class BootstrapAuthenticationForm(AuthenticationForm):
+class loginForm(forms.Form):
     """Authentication form which uses boostrap CSS."""
     username = forms.CharField(max_length=254,
                                widget=forms.TextInput({
@@ -66,10 +66,10 @@ class Profile(forms.Form):
                              'class': 'form-control',
                              'placeholder': 'City'}))
 
-    photo = forms.FileField(label='Profile Photo:',
-                           max_length=30,
-                           widget=forms.FileInput({
-                           'class': 'control-label'}))
+    #photo = forms.FileField(label='Profile Photo:',
+    #                       max_length=30,
+    #                       widget=forms.FileInput({
+    #                       'class': 'control-label'}))
 
     profileText = forms.CharField(label="Profile text:",
                                   max_length=1500,

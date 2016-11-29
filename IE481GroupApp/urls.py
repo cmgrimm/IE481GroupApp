@@ -20,19 +20,7 @@ urlpatterns = [
     url(r'^classPage$', app.views.classPage, name='classPage'),
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about', app.views.about, name='about'),
-    url(r'^login/$',
-        django.contrib.auth.views.login,
-        {
-            'template_name': 'app/login.html',
-            'authentication_form': app.forms.BootstrapAuthenticationForm,
-            #'new_account': app.forms.BootstrapNewAccountForm,
-            'extra_context':
-            {
-                'title': 'Log in',
-                'year': datetime.now().year,
-            }
-        },
-        name='login'),
+    url(r'^login/$',app.views.login,name='login'),
     url(r'^logout$',
         django.contrib.auth.views.logout,
         {

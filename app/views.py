@@ -12,8 +12,10 @@ from app.forms import loginForm
 from django.http import HttpResponseRedirect
 import hashlib
 import time
-from app.models import userAccount
+from app.models import Profile
 import django.contrib.auth.views
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 def classPage(request):
     """Renders class page"""
@@ -72,29 +74,34 @@ def newaccount(request):
     f = NewAccount()
     if request.method == 'POST':
         f = NewAccount(request.POST)
-        if f.is_valid:
-            time.sleep(2)
+        if f.is_valid():
+            #time.sleep(2)
             p = f.cleaned_data.get('password1')
             uid = f.cleaned_data.get('username')
             fn = f.cleaned_data.get('firstName')
             ln = f.cleaned_data.get('lastName')
             e = f.cleaned_data.get('email')
             b = f.cleaned_data.get('birthday')
-            #conver p to bytes
-            bp = p.encode()
-            #encrypt p
-            ep = hashlib.sha512()
-            ep.update(bp)
-            encrypted = ep.digest()
+            dj = datetime.now()
+            ##conver p to bytes
+            #bp = p.encode()
+            ##encrypt p
+            #ep = hashlib.sha512()
+            #ep.update(bp)
+            #encrypted = ep.digest()
             try:
-                c1 = userAccount.objects.create(username=uid,email=e,password=encrypted,firstName=fn,lastName=ln,grade='',major='',city='',birthday=b,profileText='')
+                newUser = User.objects.create_user(username=uid,password=p,last_login=dj,
+                                                   is_superuser=False,first_name=fn,
+                                                   last_name=ln,email=e,is_staff=False,
+                                                   is_active=True,date_joined=dj)
                 if newUser:
-                    return HttpResponseRedirect('../profile/')
+                    print("Good")
+                    return HttpResponseRedirect('../login/')
             except Exception as ex:
                 print(ex)
             return render(
                 request,
-                'app/index.html',
+                'app/newaccount.html',
                 {
                     'myForm':f
                 }
@@ -181,15 +188,10 @@ def login(request):
         if lf.is_valid(): # validate data
             uid=request.POST.get('username')
             p=request.POST.get('password')
-            #conver p to bytes
-            bp = p.encode()
-            #encrypt p
-            ep = hashlib.sha512()
-            ep.update(bp)
-            encrypted = ep.digest()
-            #authenticate
-            if userAccount.objects.filter(username = uid, password=encrypted).exists():
-                request.session['UserID']=uid
+            user = authenticate(username=uid, password=p)
+            if user:
+                print('Logged In')
+                request.session['username']=uid
                 return HttpResponseRedirect('/')
             else:
                 return render(request,

@@ -25,15 +25,5 @@ Create an account
 
 </body>
 
-<script type="text/javascript">
 
-    $(':text').keyup(function () {
-        if ($('#password1').val() == "" || $('#password2').val() == "" || $('#password1').val() != $('#password2').val()) {
-            $('#Send').attr('disabled', true);
-        } else {
-            $('#Send').removeAttr('disabled');
-        }
-    });
-
-</script>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% if user.is_authenticated %}
+{% if request.user.is_authenticated %}
 <form id="logoutForm" action="/logout" method="post" class="navbar-right">
     {% csrf_token %}
     <ul class="nav navbar-nav navbar-right">

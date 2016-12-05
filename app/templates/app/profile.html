@@ -1,4 +1,4 @@
-﻿{% extends "app/layout.html" %}
+﻿{% extends "app/base.html" %}
 
 {% block content %}
 
@@ -14,7 +14,7 @@ Profile
 <FORM method="post">
     {% csrf_token %}
         <table>
-            {{ profileTable.as_table }}
+            {{ myForm.as_table }}
         </table>
 
     <div class="row">

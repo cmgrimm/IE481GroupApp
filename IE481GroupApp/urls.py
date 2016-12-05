@@ -4,8 +4,9 @@ Definition of urls for IE481GroupApp.
 
 from datetime import datetime
 from django.conf.urls import url
+from django.conf.urls import include
+from django.conf.urls import *
 import django.contrib.auth.views
-
 import app.forms
 import app.views
 
@@ -18,7 +19,7 @@ import app.views
 urlpatterns = [
     # Examples:
     url(r'^$', app.views.home, name='home'),
-    #(r'^messages/', include('django_messages.urls')),
+    url(r'^messages/', include('django_messages.urls')),
     url(r'^classPage$', app.views.classPage, name='classPage'),
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about', app.views.about, name='about'),

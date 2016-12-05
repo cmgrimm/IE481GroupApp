@@ -7,7 +7,7 @@ from django.http import HttpRequest
 from django.template import RequestContext
 from datetime import datetime
 from app.forms import NewAccount
-from app.forms import Profile
+from app.forms import Profilef
 from app.forms import loginForm
 from django.http import HttpResponseRedirect
 import hashlib
@@ -28,9 +28,9 @@ def classPage(request):
 def profile(request):
     """Renders profile page"""
     assert isinstance(request,HttpRequest)
-    f = NewAccount()
+    f = Profilef()
     if request.method == 'POST':
-        f = NewAccount(request.POST)
+        f = Profilef(request.POST)
         if f.is_valid:
             time.sleep(2)
             c = f.cleaned_data.get('city')
@@ -38,10 +38,10 @@ def profile(request):
             g = f.cleaned_data.get('grade')
             m = f.cleaned_data.get('major')
             try:
-                userAccount.objects.filter(username=uid).update(city=c)
-                userAccount.objects.filter(username=uid).update(profileText=pt)
-                userAccount.objects.filter(username=uid).update(grade=g)
-                userAccount.objects.filter(username=uid).update(major=m)
+                Profile.objects.filter(username=uid).update(city=c)
+                Profile.objects.filter(username=uid).update(profileText=pt)
+                Profile.objects.filter(username=uid).update(grade=g)
+                Profile.objects.filter(username=uid).update(major=m)
             except Exception as ex:
                 print(ex)
             return render(
@@ -94,9 +94,21 @@ def newaccount(request):
                                                    is_superuser=False,first_name=fn,
                                                    last_name=ln,email=e,is_staff=False,
                                                    is_active=True,date_joined=dj)
+                newBday = Profile.objects.filter(username=uid).update(birthday=b)
                 if newUser:
                     print("Good")
-                    return HttpResponseRedirect('../login/')
+                    user = authenticate(username=uid, password=p)
+                    request.session['username']=uid
+                    pf = NewAccount()
+                    return render(
+                        request,
+                        'app/profile.html',
+                        {
+                            'myForm':pf,
+                            'user':user,
+                        }
+                    )
+
             except Exception as ex:
                 print(ex)
             return render(
@@ -192,7 +204,13 @@ def login(request):
             if user:
                 print('Logged In')
                 request.session['username']=uid
-                return HttpResponseRedirect('/')
+                request.user=user
+                return render(request,
+                       'app/index.html',
+                       {
+                           'title':'Hello'
+                       }
+                )
             else:
                 return render(request,
                        'app/login.html',

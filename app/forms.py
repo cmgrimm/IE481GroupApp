@@ -58,7 +58,7 @@ class NewAccount(forms.Form):
                                    'class': 'form-control',
                                    'placeholder':'Confirm Password'}))
 
-class Profile(forms.Form):
+class Profilef(forms.Form):
 
     city = forms.CharField(label='City:',
                            max_length=30,

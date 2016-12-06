@@ -12,7 +12,7 @@ from django.dispatch import receiver
 
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name="sender")
-    reciever = models.ForeignKey(User, related_name="reciever")
+    receiver = models.ForeignKey(User, related_name="reciever")
     msg_content = models.TextField(max_length=1500)
     created_at = models.TimeField()
 

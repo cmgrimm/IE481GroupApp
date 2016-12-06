@@ -47,7 +47,6 @@ def profile(request):
             m = f.cleaned_data.get('major')
             uid = request.session['username']
             uid = User.objects.filter(username=uid)
-            uid = uid['id']
             try:
                 Profile.objects.filter(id=uid).update(city=c)
                 Profile.objects.filter(id=uid).update(profileText=pt)
@@ -108,7 +107,7 @@ def newaccount(request):
                                                    is_superuser=False,first_name=fn,
                                                    last_name=ln,email=e,is_staff=False,
                                                    is_active=True,date_joined=dj)
-                newBday = Profile.objects.filter(username=uid).update(birthday=b)
+                #newBday = Profile.objects.filter(username=uid).update(birthday=b)
                 if newUser:
                     print("Good")
                     user = authenticate(username=uid, password=p)
@@ -219,8 +218,8 @@ def login(request):
         # POST
         lf = loginForm(request.POST)
         if lf.is_valid(): # validate data
-            uid=request.POST.get('username')
-            p=request.POST.get('password')
+            p = lf.cleaned_data.get('password')
+            uid = lf.cleaned_data.get('username')
             user = authenticate(username=uid, password=p)
             if user:
                 print('Logged In')

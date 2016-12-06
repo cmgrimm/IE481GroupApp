@@ -17,12 +17,21 @@ import django.contrib.auth.views
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
+try:
+    user
+except NameError:
+    user = None
+
+
 def classPage(request):
     """Renders class page"""
     assert isinstance(request,HttpRequest)
     return render(
         request,
         'app/classPage.html',
+        {
+            'user':user,
+        }
     )
 
 def profile(request):
@@ -31,24 +40,27 @@ def profile(request):
     f = Profilef()
     if request.method == 'POST':
         f = Profilef(request.POST)
-        if f.is_valid:
-            time.sleep(2)
+        if f.is_valid():
             c = f.cleaned_data.get('city')
             pt = f.cleaned_data.get('profileText')
             g = f.cleaned_data.get('grade')
             m = f.cleaned_data.get('major')
+            uid = request.session['username']
+            uid = User.objects.filter(username=uid)
+            uid = uid['id']
             try:
-                Profile.objects.filter(username=uid).update(city=c)
-                Profile.objects.filter(username=uid).update(profileText=pt)
-                Profile.objects.filter(username=uid).update(grade=g)
-                Profile.objects.filter(username=uid).update(major=m)
+                Profile.objects.filter(id=uid).update(city=c)
+                Profile.objects.filter(id=uid).update(profileText=pt)
+                Profile.objects.filter(id=uid).update(grade=g)
+                Profile.objects.filter(id=uid).update(major=m)
             except Exception as ex:
                 print(ex)
             return render(
                 request,
                 'app/index.html',
                 {
-                    'myForm':f
+                    'myForm':f,
+                    'user':user,
                 }
             )
         else:
@@ -56,7 +68,8 @@ def profile(request):
                 request,
                 'app/profile.html',
                 {
-                    'myForm':f
+                    'myForm':f,
+                    'user':user,
                 }
             )
     else:
@@ -64,7 +77,8 @@ def profile(request):
             request,
             'app/profile.html',
             { 
-                'myForm':f
+                'myForm':f,
+                'user':user,
             }
         )
 
@@ -99,6 +113,7 @@ def newaccount(request):
                     print("Good")
                     user = authenticate(username=uid, password=p)
                     request.session['username']=uid
+                    request.session['user']=user
                     pf = NewAccount()
                     return render(
                         request,
@@ -140,7 +155,10 @@ def recovery(request):
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/recovery.html'
+        'app/recovery.html',
+        {
+            'user':user,
+        }
     )
 
 def home(request):
@@ -152,6 +170,7 @@ def home(request):
         {
             'title':'Home Page',
             'year':datetime.now().year,
+            'user':user,
         }
     )
 
@@ -165,6 +184,7 @@ def contact(request):
             'title':'Contact',
             'message':'Contact us!',
             'year':datetime.now().year,
+            'user':user,
         }
     )
 
@@ -178,6 +198,7 @@ def about(request):
             'title':'About',
             'message':'This app is cool.',
             'year':datetime.now().year,
+            'user':user,
         }
     )
 
@@ -204,11 +225,12 @@ def login(request):
             if user:
                 print('Logged In')
                 request.session['username']=uid
-                request.user=user
+                request.session['user']=user
                 return render(request,
                        'app/index.html',
                        {
-                           'title':'Hello'
+                           'title':'Hello',
+                           'user':user,
                        }
                 )
             else:

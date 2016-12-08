@@ -5,22 +5,31 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      <p><a href="about/">About</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
+      <p><a href="about/">"Ad"</a></p>
+      <p><a href="about/">"Ad"</a></p>
+      <p><a href="about/">"Ad"</a></p>
+      <p><a href="about/">"Ad"</a></p>
+      <p><a href="about/">"Ad"</a></p>
+      <p><a href="about/">"Ad"</a></p>
+      <p><a href="about/">"Ad"</a></p>
+      <p><a href="about/">"Ad"</a></p>
+      <p><a href="about/">"Ad"</a></p>
+      <p><a href="about/">"Ad"</a></p>
     </div>
     <div class="col-sm-8 text-left"> 
 
       {% if request.session.username %}
          <h1>Hello {{ request.session.username }}!</h1>
+         <p>To add a class select "Add Class" to the right.</p>
+         <p>To send/view messages, click "Messages" at the top right.</p>
       {% else %}
          <h1>Welcome Guest!</h1>
+         <p>To login or create and account, select "Login" at the top right.</p>
       {% endif %}
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+      <h3>Hello!</h3>
+      <p>This is cool.</p>
     </div>
     {% if request.session.username %}
         <div class="col-sm-2 sidenav">

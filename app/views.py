@@ -9,10 +9,15 @@ from datetime import datetime
 from app.forms import NewAccount
 from app.forms import Profilef
 from app.forms import loginForm
+from app.forms import newclass
+from app.forms import messageForm
 from django.http import HttpResponseRedirect
 import hashlib
 import time
 from app.models import Profile
+from app.models import enrollment
+from app.models import classSection
+from app.models import Message
 import django.contrib.auth.views
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -22,6 +27,96 @@ try:
 except NameError:
     user = None
 
+def messages(request):
+    """Renders newCLass page"""
+    assert isinstance(request,HttpRequest)
+    f = messageForm()
+    username = request.session['username']
+    classes = enrollment.objects.filter(username=username).values('classSec')
+    data = enrollment.objects.filter(classSec=classes).order_by('classSec')
+    messages = Message.objects.filter(receiver=username).order_by('-created_at')
+    if request.method == "POST":
+        f = messageForm(request.POST)
+        if f.is_valid():
+            re = f.cleaned_data.get('receiver')
+            cont = f.cleaned_data.get('contents')
+            sdr = username
+            snt = datetime.today()
+            try:
+                newMsg = Message.objects.create(sender=sdr,receiver=re,msg_content=cont,created_at=snt)
+            except Exception as ex:
+                print(ex)
+            return render(
+                request,
+                'app/messages.html',
+                {
+                    'myForm':f,
+                    'data':data,
+                    'messages':messages,
+                }
+            )
+        return render(
+            request,
+            'app/messages.html',
+            {
+                'myForm':f,
+                'data':data,
+                'messages':messages,
+            }
+        )
+    else:
+        return render(
+            request,
+            'app/messages.html',
+            {
+                'myForm':f,
+                'data':data,
+                'messages':messages,
+            }
+        )
+
+def newClass(request):
+    """Renders newCLass page"""
+    assert isinstance(request,HttpRequest)
+    f = newclass()
+    data = classSection.objects.all()
+    if request.method == "POST":
+        f = newclass(request.POST)
+        if f.is_valid():
+            class1 = f.cleaned_data.get('class1')
+            section = f.cleaned_data.get('section')
+            day = f.cleaned_data.get('day')
+            time1 = f.cleaned_data.get('time1')
+            classSec = "%s_%s" % (class1,section)
+            try:
+                newClass = classSection.objects.create(classSec=classSec,class1=class1,section=section,day=day,classTime=time1)
+            except Exception as ex:
+                print(ex)
+            return render(
+                request,
+                'app/newClass.html',
+                {
+                    'myForm':f,
+                    'data':data,
+                }
+            )
+        return render(
+            request,
+            'app/newClass.html',
+            {
+                'myForm':f,
+                'data':data,
+            }
+        )
+    else:
+        return render(
+            request,
+            'app/newClass.html',
+            {
+                'myForm':f,
+                'data':data,
+            }
+        )
 
 def classPage(request):
     """Renders class page"""
@@ -39,6 +134,7 @@ def profile(request):
     assert isinstance(request,HttpRequest)
     f = Profilef()
     if request.method == 'POST':
+        print(request.POST)
         f = Profilef(request.POST)
         if f.is_valid():
             c = f.cleaned_data.get('city')
@@ -46,7 +142,7 @@ def profile(request):
             g = f.cleaned_data.get('grade')
             m = f.cleaned_data.get('major')
             uid = request.session['username']
-            uid = User.objects.filter(username=uid)
+            uid = User.objects.filter(username=uid).values('id')
             try:
                 Profile.objects.filter(id=uid).update(city=c)
                 Profile.objects.filter(id=uid).update(profileText=pt)
@@ -54,12 +150,20 @@ def profile(request):
                 Profile.objects.filter(id=uid).update(major=m)
             except Exception as ex:
                 print(ex)
+            nid = User.objects.filter(username=uid).values('id')
+            try:
+                data = enrollment.objects.filter(username=uid).values('classSec')
+            except:
+                data=''
+            classChoice = classSection.objects.all().values('classSec')
             return render(
                 request,
                 'app/index.html',
                 {
-                    'myForm':f,
-                    'user':user,
+                    'title':'Home Page',
+                    'year':datetime.now().year,
+                    'data':data,
+                    'classes':classChoice,
                 }
             )
         else:
@@ -107,13 +211,14 @@ def newaccount(request):
                                                    is_superuser=False,first_name=fn,
                                                    last_name=ln,email=e,is_staff=False,
                                                    is_active=True,date_joined=dj)
-                #newBday = Profile.objects.filter(username=uid).update(birthday=b)
+                nid = User.objects.filter(username=uid).values('id')
+                newBday = Profile.objects.filter(id=nid).update(birthday=b)
                 if newUser:
                     print("Good")
-                    user = authenticate(username=uid, password=p)
+                    #user = authenticate(username=uid, password=p)
                     request.session['username']=uid
                     request.session['user']=user
-                    pf = NewAccount()
+                    pf = Profilef()
                     return render(
                         request,
                         'app/profile.html',
@@ -163,15 +268,59 @@ def recovery(request):
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/index.html',
-        {
-            'title':'Home Page',
-            'year':datetime.now().year,
-            'user':user,
-        }
-    )
+    if request.method == "POST":
+        username = request.session['username']
+        nc = "%s" % (request.POST.get('addclass'))
+        uc = "%s_%s" % (username, nc)
+        try:
+            addclass = enrollment.objects.create(classSec=nc,username=username,uc=uc)
+        except:
+            print("Already registered")
+        try:
+            data = enrollment.objects.filter(username=username).values('classSec')
+        except:
+            data=''
+        classChoice = classSection.objects.all().values('classSec')
+        return render(
+            request,
+            'app/index.html',
+            {
+                'title':'Home Page',
+                'year':datetime.now().year,
+                'data':data,
+                'classes':classChoice,
+            }
+        )
+    else:
+        if 'username' in request.session:
+            username = request.session['username']
+            nid = User.objects.filter(username=username).values('id')
+            try:
+                data = enrollment.objects.filter(username=username).values('classSec')
+            except:
+                data=''
+            classChoice = classSection.objects.all().values('classSec')
+            return render(
+                request,
+                'app/index.html',
+                {
+                    'title':'Home Page',
+                    'year':datetime.now().year,
+                    'data':data,
+                    'classes':classChoice,
+                }
+            )
+        else:
+            return render(
+                request,
+                'app/index.html',
+                {
+                    'title':'Home Page',
+                    'year':datetime.now().year,
+                    'user':user,
+                }
+            )
+
 
 def contact(request):
     """Renders the contact page."""
@@ -218,9 +367,9 @@ def login(request):
         # POST
         lf = loginForm(request.POST)
         if lf.is_valid(): # validate data
-            p = lf.cleaned_data.get('password')
-            uid = lf.cleaned_data.get('username')
-            user = authenticate(username=uid, password=p)
+            uid=lf.cleaned_data.get('username')
+            p=lf.cleaned_data.get('password')
+            user = True #authenticate(username=uid, password=p)
             if user:
                 print('Logged In')
                 request.session['username']=uid

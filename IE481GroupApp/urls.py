@@ -19,6 +19,8 @@ import app.views
 urlpatterns = [
     # Examples:
     url(r'^$', app.views.home, name='home'),
+    url(r'^newclass$', app.views.newClass, name='newClass'),
+    url(r'^messages', app.views.messages, name='messages'),
     url(r'^messages/', include('django_messages.urls')),
     url(r'^classPage$', app.views.classPage, name='classPage'),
     url(r'^contact$', app.views.contact, name='contact'),

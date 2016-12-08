@@ -11,8 +11,8 @@
     </div>
     <div class="col-sm-8 text-left"> 
 
-      {% if user.is_authenticated %}
-         <h1>Hello {{ user.username }}!</h1>
+      {% if request.session.username %}
+         <h1>Hello {{ request.session.username }}!</h1>
       {% else %}
          <h1>Welcome Guest!</h1>
       {% endif %}
@@ -22,21 +22,46 @@
       <h3>Test</h3>
       <p>Lorem ipsum...</p>
     </div>
-    <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>Class 1</p>
-      </div>
-      <div class="well">
-        <p>Class 2</p>
-      </div>
-      <div class="well">
-        <p>Class 3</p>
-      </div>
-      <div class="well">
-        <p>Class 4</p>
-      </div>
-    </div>
+    {% if request.session.username %}
+        <div class="col-sm-2 sidenav">
+            <h5>Classes:</h5>
+            <table>
+                {% for v in data %}
+                    <tr>
+                        <td style="padding:10px">{{ v.classSec }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add a Class</button>
+        </div>
+    {% endif %}
   </div>
+</div>
+
+    <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select Class to Add</h4>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <select class="form-control" id="addclass">
+                    {% for r in classes %}
+                        <option>{{ r.classSec }}</option>
+                    {% endfor %}
+                </select>
+                <input name="Done" TYPE="submit" VALUE="Add" class="btn btn?default" />
+            </form>  
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

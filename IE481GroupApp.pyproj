@@ -63,6 +63,7 @@
     <Content Include="app\static\app\scripts\carousel.js" />
     <Content Include="app\static\app\scripts\collapse.js" />
     <Content Include="app\static\app\scripts\dropdown.js" />
+    <Content Include="app\static\app\scripts\dt_msg.js" />
     <Content Include="app\static\app\scripts\modal.js" />
     <Content Include="app\static\app\scripts\moment-2.15.2.js" />
     <Content Include="app\static\app\scripts\popover.js" />
@@ -70,11 +71,13 @@
     <Content Include="app\static\app\scripts\tab.js" />
     <Content Include="app\static\app\scripts\tooltip.js" />
     <Content Include="app\static\app\scripts\transition.js" />
+    <Content Include="app\templates\app\messages.html" />
     <Content Include="app\templates\app\newaccount.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\profile.html" />
     <Content Include="app\templates\app\recovery.html" />
     <Content Include="app\templates\app\classPage.html" />
+    <Content Include="app\templates\app\newClass.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

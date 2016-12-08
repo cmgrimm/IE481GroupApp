@@ -11,10 +11,10 @@ from django.dispatch import receiver
 # Create your models here.
 
 class Message(models.Model):
-    sender = models.ForeignKey(User, related_name="sender")
-    receiver = models.ForeignKey(User, related_name="reciever")
-    msg_content = models.TextField(max_length=1500)
-    created_at = models.TimeField()
+    sender = models.CharField(max_length=100)
+    receiver = models.CharField(max_length=100)
+    msg_content = models.TextField(max_length=2500)
+    created_at = models.DateTimeField()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -35,13 +35,14 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 class classSection(models.Model):
-    classSec = models.CharField(max_length=100,primary_key=True)
+    classSec = models.CharField(max_length=100,unique=True)
     class1 = models.CharField(max_length=100)
     section = models.CharField(max_length=100)
     day = models.CharField(max_length=100)
-    time = models.CharField(max_length=100)
+    classTime = models.CharField(max_length=100)
     
 
 class enrollment(models.Model):
-    username = models.ForeignKey('Profile',on_delete=models.CASCADE)
+    username = models.CharField(max_length=100)
     classSec = models.CharField(max_length=100)
+    uc = models.CharField(max_length=200,unique=True)

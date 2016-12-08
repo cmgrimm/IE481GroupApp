@@ -4,7 +4,27 @@ Definition of forms.
 
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
+from app.models import classSection
 from django.utils.translation import ugettext_lazy as _
+
+
+class newclass(forms.Form):
+    class1 = forms.CharField(max_length=254,
+                               widget=forms.TextInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Class'}))
+    section = forms.CharField(max_length=254,
+                               widget=forms.TextInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Section'}))
+    day = forms.CharField(max_length=254,
+                               widget=forms.TextInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Day'}))
+    time1 = forms.CharField(max_length=254,
+                               widget=forms.TextInput({
+                                   'class': 'form-control',
+                                   'placeholder': 'Time'}))
 
 class loginForm(forms.Form):
     """Authentication form which uses boostrap CSS."""
@@ -98,3 +118,12 @@ class Profilef(forms.Form):
     major = forms.ChoiceField(label = "Major:", 
                                    choices=mjr)
 
+class messageForm(forms.Form):
+    receiver = forms.CharField(label=_("To:"),
+                               widget=forms.TextInput({
+                                   'class': 'form-control',
+                                   'placeholder':'username'}))
+    contents = forms.CharField(label=_("Body:"),max_length=2500,
+                               widget=forms.Textarea({
+                                   'class': 'form-control',
+                                   'placeholder':'Text'}))

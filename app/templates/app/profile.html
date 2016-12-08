@@ -16,47 +16,12 @@ Profile
         <table>
             {{ myForm.as_table }}
         </table>
-
-    <div class="row">
-        <div class="col-sm-4">  
-            <div id='class'>
-                <select id="slct2" name="slct2" class="selectpicker" data-live-search="true">
-                    <option data-tokens="IExxx">IExxx</option>
-                    <option data-tokens="MExxx">MExxx</option>
-                    <option data-tokens="DExxx">DExxx</option>
-                </select>
-            </div> 
-        </div>
-    </div>
-
     <br />
-    <input name='class' type='button' id='add' value='Add Classes' class="btn btn‐default"/>
-
     <p> 
         <br />
         <input name="Done" TYPE="submit" VALUE="Done" class="btn btn‐default" />
     </p>
 </FORM>
-
- 
-
-<script type="text/javascript">
-
-var item = document.getElementById('class');    
-
-document.getElementById('add').onclick = function () {
-
-  var input = document.createElement('select'),
-      div = document.createElement('div');
- input.innerHTML = document.getElementById("slct2").innerHTML;
-  
-  div.appendChild(input);
-  //...
-
-  item.appendChild(div);
-
-};
-</script>
 
 </body>
 

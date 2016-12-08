@@ -50,19 +50,16 @@ def messages(request):
             sdr = username
             snt = datetime.today()
             users = User.objects.filter(username=re).values('username')
-            uns = []
-            for v in users:
-                print(v)
-                uns.append(list(v.values()))
-            if re in uns:
-                try:
-                    newMsg = Message.objects.create(sender=sdr,receiver=re,subject=sub,msg_content=cont,created_at=snt)
-                except Exception as ex:
-                    print(ex)
-                    #messages.add_message(request, messages.error, 'Message not sent:'+ex)
-            else:
-                #messages.add_message(request, message.error, 'Message not sent: User not found.')
-                print("error")
+            uns = list(users.values())
+            #for v in users:
+            #    print(v)
+            #    uns.append(list(v.values()))
+            #endfor
+            try:
+                newMsg = Message.objects.create(sender=sdr,receiver=re,subject=sub,msg_content=cont,created_at=snt)
+            except Exception as ex:
+                print(ex)
+                #messages.add_message(request, messages.error, 'Message not sent:'+ex)
             return render(
                 request,
                 'app/messages.html',
@@ -80,6 +77,7 @@ def messages(request):
                 'myForm':f,
                 'data':data,
                 'messages':messages,
+                'inbox':inbox,
             }
         )
     else:
@@ -90,6 +88,7 @@ def messages(request):
                 'myForm':f,
                 'data':data,
                 'messages':messages,
+                'inbox':inbox,
             }
         )
 
@@ -406,15 +405,26 @@ def login(request):
             p=lf.cleaned_data.get('password')
             user = True #authenticate(username=uid, password=p)
             if user:
-                print('Logged In')
                 request.session['username']=uid
                 request.session['user']=user
-                return render(request,
-                       'app/index.html',
-                       {
-                           'title':'Hello',
-                           'user':user,
-                       }
+                username=uid
+                try:
+                    data = enrollment.objects.filter(username=username).values('classSec')
+                except:
+                    data=''
+                classChoice = classSection.objects.all().values('classSec')
+                print('Logged In')
+                f=addClass()
+                return render(
+                    request,
+                    'app/index.html',
+                    {
+                        'title':'Home Page',
+                        'year':datetime.now().year,
+                        'data':data,
+                        'classes':classChoice,
+                        'myForm':f,
+                    }
                 )
             else:
                 return render(request,

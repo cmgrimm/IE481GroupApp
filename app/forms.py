@@ -124,7 +124,7 @@ class messageForm(forms.Form):
                                    'class': 'form-control',
                                    'placeholder':'username'}))
     subject = forms.CharField(label=_("Subject:"),max_length=100,
-                               widget=forms.Textarea({
+                               widget=forms.TextInput({
                                    'class': 'form-control',
                                    'placeholder':'Text'}))
     contents = forms.CharField(label=_("Body:"),max_length=2500,

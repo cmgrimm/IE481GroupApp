@@ -6,7 +6,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from app.models import classSection
 from django.utils.translation import ugettext_lazy as _
-
+from app.classChoices import getChoices
 
 class newclass(forms.Form):
     class1 = forms.CharField(max_length=254,
@@ -123,7 +123,18 @@ class messageForm(forms.Form):
                                widget=forms.TextInput({
                                    'class': 'form-control',
                                    'placeholder':'username'}))
+    subject = forms.CharField(label=_("Subject:"),max_length=100,
+                               widget=forms.Textarea({
+                                   'class': 'form-control',
+                                   'placeholder':'Text'}))
     contents = forms.CharField(label=_("Body:"),max_length=2500,
                                widget=forms.Textarea({
                                    'class': 'form-control',
                                    'placeholder':'Text'}))
+
+class addClass(forms.Form): 
+    addclass= forms.CharField(label="",required=True,
+                                 widget = forms.Select({
+                                     'choices':""
+                                     })
+                             )

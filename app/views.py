@@ -11,6 +11,7 @@ from app.forms import Profilef
 from app.forms import loginForm
 from app.forms import newclass
 from app.forms import messageForm
+from app.forms import addClass
 from django.http import HttpResponseRedirect
 import hashlib
 import time
@@ -18,6 +19,7 @@ from app.models import Profile
 from app.models import enrollment
 from app.models import classSection
 from app.models import Message
+from django.contrib import messages
 import django.contrib.auth.views
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -33,26 +35,42 @@ def messages(request):
     f = messageForm()
     username = request.session['username']
     classes = enrollment.objects.filter(username=username).values('classSec')
-    data = enrollment.objects.filter(classSec=classes).order_by('classSec')
-    messages = Message.objects.filter(receiver=username).order_by('-created_at')
+    choice = []
+    for v in classes:
+        print(v)
+        choice.append(v.values())
+    data = enrollment.objects.filter(classSec__in=classes).order_by('classSec')
+    inbox = Message.objects.filter(receiver=username).order_by('-created_at')
     if request.method == "POST":
         f = messageForm(request.POST)
         if f.is_valid():
             re = f.cleaned_data.get('receiver')
+            sub = f.cleaned_data.get('subject')
             cont = f.cleaned_data.get('contents')
             sdr = username
             snt = datetime.today()
-            try:
-                newMsg = Message.objects.create(sender=sdr,receiver=re,msg_content=cont,created_at=snt)
-            except Exception as ex:
-                print(ex)
+            users = User.objects.filter(username=re).values('username')
+            uns = []
+            for v in users:
+                print(v)
+                uns.append(list(v.values()))
+            if re in uns:
+                try:
+                    newMsg = Message.objects.create(sender=sdr,receiver=re,subject=sub,msg_content=cont,created_at=snt)
+                except Exception as ex:
+                    print(ex)
+                    #messages.add_message(request, messages.error, 'Message not sent:'+ex)
+            else:
+                #messages.add_message(request, message.error, 'Message not sent: User not found.')
+                print("error")
             return render(
                 request,
                 'app/messages.html',
                 {
                     'myForm':f,
                     'data':data,
-                    'messages':messages,
+                    'inbox':inbox,
+                    #'messages':message
                 }
             )
         return render(
@@ -268,29 +286,44 @@ def recovery(request):
 def home(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+    f = addClass()
     if request.method == "POST":
-        username = request.session['username']
-        nc = "%s" % (request.POST.get('addclass'))
-        uc = "%s_%s" % (username, nc)
-        try:
-            addclass = enrollment.objects.create(classSec=nc,username=username,uc=uc)
-        except:
-            print("Already registered")
-        try:
-            data = enrollment.objects.filter(username=username).values('classSec')
-        except:
-            data=''
-        classChoice = classSection.objects.all().values('classSec')
-        return render(
-            request,
-            'app/index.html',
-            {
-                'title':'Home Page',
-                'year':datetime.now().year,
-                'data':data,
-                'classes':classChoice,
-            }
-        )
+        cf = addClass(request.POST)
+        if cf.is_valid():
+            username = request.session['username']
+            nc = "%s" % (request.POST.get('addclass'))
+            uc = "%s_%s" % (username, nc)
+            try:
+                addclass = enrollment.objects.create(classSec=nc,username=username,uc=uc)
+            except:
+                print("Already registered")
+            try:
+                data = enrollment.objects.filter(username=username).values('classSec')
+            except:
+                data=''
+            classChoice = classSection.objects.all().values('classSec')
+            return render(
+                request,
+                'app/index.html',
+                {
+                    'title':'Home Page',
+                    'year':datetime.now().year,
+                    'data':data,
+                    'classes':classChoice,
+                    'myForm':f,
+                }
+            )
+        else:
+            return render(
+                request,
+                'app/index.html',
+                {
+                    'title':'Home Page',
+                    'year':datetime.now().year,
+                    'user':user,
+                    'myForm':f,
+                }
+            )
     else:
         if 'username' in request.session:
             username = request.session['username']
@@ -308,6 +341,7 @@ def home(request):
                     'year':datetime.now().year,
                     'data':data,
                     'classes':classChoice,
+                    'myForm':f,
                 }
             )
         else:
@@ -318,6 +352,7 @@ def home(request):
                     'title':'Home Page',
                     'year':datetime.now().year,
                     'user':user,
+                    'myForm':f,
                 }
             )
 
